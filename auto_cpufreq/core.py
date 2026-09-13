@@ -250,9 +250,11 @@ def get_literal_version(package_name):
 
 # return formatted version for a better readability
 def get_formatted_version():
-    splitted_version = get_literal_version("auto-cpufreq").split("+")
-    return splitted_version[0] + (
-        "" if len(splitted_version) > 1 else " (git: " + splitted_version[1] + ")"
+    numbered_version, separator, git_version = get_literal_version(
+        "auto-cpufreq"
+    ).partition("+")
+    return numbered_version + (
+        f" (git: {git_version})" if separator and git_version else ""
     )
 
 
